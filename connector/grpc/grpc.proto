@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package grpc;
+
+message Scopes {
+    bool offline_access = 1;
+    bool groups = 2;
+}
+
+message Identity {
+    string user_id = 1;
+    string username = 2;
+    string email = 3;
+    bool email_verified = 4;
+    repeated string groups = 5;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+    Scopes scopes = 3;
+}
+
+message LoginResponse {
+    Identity identity = 1;
+    bool valid_password = 2;
+}
+
+message RefreshRequest {
+    Scopes scopes = 1;
+    Identity identity = 2;
+}
+
+service Connector {
+    rpc Login(LoginRequest) returns (LoginResponse) {};
+    rpc Refresh(RefreshRequest) returns (Identity) {};
+}

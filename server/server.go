@@ -21,6 +21,7 @@ import (
 	"github.com/coreos/dex/connector"
 	"github.com/coreos/dex/connector/github"
 	"github.com/coreos/dex/connector/gitlab"
+	"github.com/coreos/dex/connector/grpc"
 	"github.com/coreos/dex/connector/ldap"
 	"github.com/coreos/dex/connector/mock"
 	"github.com/coreos/dex/connector/oidc"
@@ -405,6 +406,7 @@ var ConnectorsConfig = map[string]func() ConnectorConfig{
 	"gitlab":       func() ConnectorConfig { return new(gitlab.Config) },
 	"oidc":         func() ConnectorConfig { return new(oidc.Config) },
 	"saml":         func() ConnectorConfig { return new(saml.Config) },
+	"grpc":         func() ConnectorConfig { return new(grpc.Config) },
 	// Keep around for backwards compatibility.
 	"samlExperimental": func() ConnectorConfig { return new(saml.Config) },
 }
